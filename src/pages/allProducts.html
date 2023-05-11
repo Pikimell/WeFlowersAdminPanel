@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Product</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../sass/layouts/_products.scss" />
+  </head>
+  <body>
+    <section class="section sec-1">
+      <form class="form-product box js-form">
+        <input type="text" placeholder="Назва" name="title" />
+        <input
+          type="text"
+          placeholder="Type"
+          name="type"
+          value="bouquet"
+          hidden
+        />
+        <input type="text" placeholder="Теги" name="tags" />
+        <input type="number" placeholder="Вартість" name="price" />
+        <textarea name="description"> </textarea>
+        <textarea name="compound"> </textarea>
+        <input type="file" placeholder="Image" name="image" />
+        <button class="btn btn-primary">Зберегти запис</button>
+      </form>
+      <div class="box popular-card preview js-preview"></div>
+      <div class="box bouquet-elem small-preview js-small-preview">
+        <div class="img-box">
+          <img src="#" alt="#" class="js-preview-image" />
+        </div>
+        <p class="h4">Title</p>
+        <p class="h5">В наявності</p>
+        <p class="h3">100 UAH</p>
+        <button class="btn btn-primary">До кошика</button>
+      </div>
+    </section>
+
+    <section class="section sec-2"></section>
+
+    <div class="backdrop">
+      <div class="modal"></div>
+    </div>
+
+    <script src="../js/pages/products.js" type="module"></script>
+  </body>
+</html>

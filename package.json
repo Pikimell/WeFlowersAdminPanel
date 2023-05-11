@@ -1,23 +1,29 @@
 {
-  "name": "parcel-project-template",
+  "name": "we-flowers-admin-panel",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://goitacademy.github.io/parcel-project-template",
+  "homepage": "",
   "scripts": {
+    "prepush": "git add .",
+    "push": "git commit -m 'update'",
+    "postpush": "git push",
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /parcel-project-template/"
+    "build": "parcel build src/*.html --public-url /WeFlowersAdminPanel/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
   "keywords": [],
-  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "author": "Pikimell",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "lodash": "^4.17.21",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {

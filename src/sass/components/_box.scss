@@ -1,0 +1,14 @@
+$greyLight: #ffffffd2;
+$greyDark: #a099998d;
+
+
+.box{
+    min-width: 20px;
+    min-height: 100px;
+    background-color: $background-color;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow:.8rem .8rem 1.4rem $greyDark, 
+            -.2rem -.2rem 1.8rem $greyLight;
+}
