@@ -2,6 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import { uid } from 'uid';
 import { toBase64 } from '../modules/helpers.js';
+import { flowersApi } from '../modules/flowerDB.js';
 
 const refs = {
   formElem: document.querySelector('.js-form'),
@@ -11,6 +12,7 @@ const refs = {
 };
 
 refs.formElem.addEventListener('input', _.throttle(onInputChange, 300));
+refs.formElem.addEventListener('change', onImageChange);
 
 function onInputChange() {
   const formData = new FormData(refs.formElem);
@@ -22,6 +24,19 @@ function onInputChange() {
 
   renderPopular(data);
   renderSmallPopular(data);
+}
+
+function onImageChange(e) {
+  if (e.target.type !== 'file') return;
+  const previewImage = document.querySelector('.js-preview-image');
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 }
 
 function renderPopular({ title, description, price, compound }) {
@@ -49,25 +64,6 @@ function renderSmallPopular({ title, price }) {
   priceElem.textContent = price + ' UAH';
 }
 
-refs.formElem.addEventListener('change', function (e) {
-  console.log(e.target.type !== 'file');
-  if (e.target.type !== 'file') return;
-  try {
-    const previewImage = document.querySelector('.js-preview-image');
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        previewImage.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  } catch (err) {
-    console.log(err);
-    console.log('Ple Enter Title');
-  }
-});
-
 refs.testBtnElem.addEventListener('click', async () => {
   const BASE_URL = `http://localhost:3000/dev`;
 
@@ -84,3 +80,19 @@ refs.testBtnElem.addEventListener('click', async () => {
   const base64 = await toBase64(file);
   axios.post(`${url}?${params}`, base64);
 });
+
+refs.formElem.addEventListener('submit', onFormSubmit);
+
+async function onFormSubmit(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = {};
+
+  data['popularity'] = 0;
+  data['isAvailable'] = true;
+
+  formData.forEach((el, key) => {
+    data[key] = el;
+  });
+  flowersApi.createProduct(data);
+}
