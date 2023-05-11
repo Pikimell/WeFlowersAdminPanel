@@ -24,10 +24,12 @@
     "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "uid": "^2.0.2"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
+    "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
