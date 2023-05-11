@@ -1,7 +1,4 @@
 import _ from 'lodash';
-import axios from 'axios';
-import { uid } from 'uid';
-import { toBase64 } from '../modules/helpers.js';
 import { flowersApi } from '../modules/flowerDB.js';
 
 const refs = {
@@ -39,9 +36,9 @@ function onImageChange(e) {
   }
 }
 
-function renderPopular({ title, description, price, compound }) {
+function renderPopular({ name, description, price, compound }) {
   const markup = `
-            <p class="h3">${title}</p>
+            <p class="h3">${name}</p>
             <p>В наявності</p>
             <p>${description}</p>
             <p class="h3">Містить</p>
@@ -57,29 +54,14 @@ function renderPopular({ title, description, price, compound }) {
   refs.previewElem.innerHTML = markup;
 }
 
-function renderSmallPopular({ title, price }) {
+function renderSmallPopular({ name, price }) {
   const titleElem = refs.smallPreviewElem.querySelector('.h4');
   const priceElem = refs.smallPreviewElem.querySelector('.h3');
-  titleElem.textContent = title;
+  titleElem.textContent = name;
   priceElem.textContent = price + ' UAH';
 }
 
-refs.testBtnElem.addEventListener('click', async () => {
-  const BASE_URL = `http://localhost:3000/dev`;
-
-  const url = `${BASE_URL}/files`;
-
-  const files = refs.formElem.elements.image.files;
-  const file = files[0];
-  const params = new URLSearchParams({
-    fileName: uid() + file.name.slice(-4),
-    fileType: file.type,
-  });
-  if (files.length == 0) return;
-
-  const base64 = await toBase64(file);
-  axios.post(`${url}?${params}`, base64);
-});
+refs.testBtnElem.addEventListener('click', async () => {});
 
 refs.formElem.addEventListener('submit', onFormSubmit);
 
@@ -95,4 +77,5 @@ async function onFormSubmit(e) {
     data[key] = el;
   });
   flowersApi.createProduct(data);
+  e.target.reset();
 }
